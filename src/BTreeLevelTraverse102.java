@@ -1,20 +1,9 @@
-import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class BTreeLevelTraverse102 {
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> resList = new ArrayList<>();
         List<Integer> levelList = new ArrayList<>();
