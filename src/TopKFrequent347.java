@@ -14,8 +14,8 @@ public class TopKFrequent347 {
             }
         }
 
-        Set<Map.Entry<Integer,Integer>> entrySet=numMap.entrySet();
-        ArrayList<Map.Entry<Integer, Integer>> mapList = new ArrayList<>(entrySet);
+        //将numMap转换为List
+        ArrayList<Map.Entry<Integer, Integer>> mapList = new ArrayList<>(numMap.entrySet());
 
         //定义比较Entry的内部类
         class IntegerComparator implements Comparator<Map.Entry<Integer, Integer>> {

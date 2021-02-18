@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
@@ -7,27 +6,44 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Collectors;
 
 public class Test {
-    public static int value = 123;
-
-    public Test(){
-        System.out.println(value);
+    private static void swap(int[] a, int i, int j) {
+        int t = a[i];
+        a[i] = a[j];
+        a[j] = t;
     }
 
-    public static int hammingDistance(int x, int y) {
-        int count=0;
-        while(x!=0&&y!=0){
-            if(x%2!=y%2) count++;
-            x/=2;
-            y/=2;
+    public static int partition(int[] arr, int low, int high) {
+        int flag = arr[low];     // 基准数据
+        while (low < high) {
+            // 从队尾向左移动找到小于flag的元素，并移动到low指针所在位置
+            while (low < high && arr[high] >= flag) high--;
+            arr[low] = arr[high];
+            // 从队首向右查找大于flag的元素，移动到刚才high指针的那个位置
+            while (low < high && arr[low] <= flag) low++;
+            arr[high] = arr[low];
         }
-        return count;
+        //左边小于flag，右边都大于flag，此时low指针的位置就是flag正确的位置
+        arr[low] = flag;
+        return low; // 返回划分的位置
+    }
+
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int mid = partition(arr, low, high);    //找到划分的位置
+            quickSort(arr, low, mid - 1);       //对前面的进行排序
+            quickSort(arr, mid + 1, high);      //对后面的进行排序
+        }
     }
 
     public static void main(String[] args) {
-        Test t=new Test();
-        System.out.println(Test.value);
+        int[] arr = {49, 38, 65, 97, 23, 22, 76, 1, 5, 8, 2, 0, -1, 22};
+        quickSort(arr, 0, arr.length - 1);
+        System.out.println(arr);
     }
+
 }
+
 

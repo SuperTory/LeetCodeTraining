@@ -34,4 +34,11 @@ public class TreeNode {
         newNode.right=list2Tree(numArr,2*index+2);
         return newNode;
     }
+
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "val=" + val +
+                '}';
+    }
 }
