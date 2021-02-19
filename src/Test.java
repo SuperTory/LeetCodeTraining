@@ -39,9 +39,8 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        int[] arr = {49, 38, 65, 97, 23, 22, 76, 1, 5, 8, 2, 0, -1, 22};
-        quickSort(arr, 0, arr.length - 1);
-        System.out.println(arr);
+        Integer i= 9;
+        System.out.println(i instanceof Integer);
     }
 
 }
