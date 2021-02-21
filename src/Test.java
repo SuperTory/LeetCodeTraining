@@ -39,10 +39,16 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        Integer i= 9;
-        System.out.println(i instanceof Integer);
+        List<Integer> integers=new ArrayList<>();
+        integers.add(1);
+        integers.add(2);
+        double d=Math.sqrt(15);
+        double f = Math.ceil(d);
+        System.out.println(d);
+        System.out.println(f);
     }
 
 }
+
 
 

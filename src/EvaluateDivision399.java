@@ -171,30 +171,33 @@ public class EvaluateDivision399 {
     }
 
     private class UnionFind {
-
-        private int[] parent;
-
-        //指向的父结点的权值
-        private double[] weight;
-
+        private int[] parent;   //父节点索引
+        private double[] weight;    //到父结点的路径权值
 
         public UnionFind(int n) {
             this.parent = new int[n];
             this.weight = new double[n];
             for (int i = 0; i < n; i++) {
-                parent[i] = i;
+                parent[i] = i;              //初始化时，并查集的根节点的parent是自己
                 weight[i] = 1.0d;
             }
         }
 
+        /**
+         * 建立x、y之间的联系
+         *
+         * @param x     节点x
+         * @param y     节点y
+         * @param value 二者之间的路径值
+         */
         public void union(int x, int y, double value) {
             int rootX = find(x);
             int rootY = find(y);
-            if (rootX == rootY) {
+            if (rootX == rootY) {   //如果二者根节点相同，不作操作
                 return;
             }
 
-            parent[rootX] = rootY;  //更新并查集，将x的父节点指向y
+            parent[rootX] = rootY;  //若二者根节点不同，更新并查集，将x的父节点指向y
             weight[rootX] = weight[y] * value / weight[x];  //更新x到y的weight值
         }
 
@@ -205,7 +208,7 @@ public class EvaluateDivision399 {
          * @return 根结点的 id
          */
         public int find(int x) {
-            if (x != parent[x]) {   //初始化时，并查集的根节点的parent是自己
+            if (x != parent[x]) {   //如果不是根节点
                 int origin = parent[x];
                 parent[x] = find(parent[x]);    //沿路径递归查找x的根节点，同时修改parent指向
                 weight[x] *= weight[origin];
@@ -213,6 +216,13 @@ public class EvaluateDivision399 {
             return parent[x];
         }
 
+        /**
+         * 若x、y相连返回其路径权值
+         *
+         * @param x 节点x
+         * @param y 节点y
+         * @return x到y的路径权值
+         */
         public double isConnected(int x, int y) {
             int rootX = find(x);
             int rootY = find(y);
@@ -223,7 +233,6 @@ public class EvaluateDivision399 {
             }
         }
     }
-
 
 
     public static void main(String[] args) {
