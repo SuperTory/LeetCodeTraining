@@ -39,19 +39,11 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        List<Integer> integers=new ArrayList<>();
-        integers.add(1);
-        integers.add(2);
-        for (int i = 0; i < integers.size(); i++) {
-            int num=integers.get(i);
-            num++;
-            integers.set(0,num);
-        }
-        System.out.println(integers.get(0));
-        double d=Math.sqrt(15);
-        double f = Math.ceil(d);
-        System.out.println(d);
-        System.out.println(f);
+        Map<Character, Integer> taskMap = new HashMap<>();
+        taskMap.put('c',1);
+        int res=taskMap.get('b');
+        int dis=1-Integer.MIN_VALUE;
+        System.out.println(res);
     }
 
 }
