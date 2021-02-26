@@ -39,11 +39,17 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        Map<Character, Integer> taskMap = new HashMap<>();
-        taskMap.put('c',1);
-        int res=taskMap.get('b');
-        int dis=1-Integer.MIN_VALUE;
-        System.out.println(res);
+//        List<Character> characters=new ArrayList<>();
+//        characters.add('a');
+//        characters.add('b');
+//        String s1=String.valueOf(characters);
+
+        TreeNode tree=new TreeNode(new int[]{1,2,3,0,0,4,5});
+        String str=tree.toString();
+        System.out.println(str);
+        TreeNode nt=tree.deserialize(str);
+        System.out.println(nt.left.val);
+
     }
 
 }
