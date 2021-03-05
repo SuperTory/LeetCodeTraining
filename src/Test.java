@@ -16,10 +16,22 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        System.out.println(3/2*2);
+        int i = -17;
+        int a = i >>> 4;
+        System.out.println(Integer.MAX_VALUE);
     }
 
 }
+
+    public static void singleTheadPoolTest() {
+        ExecutorService pool = Executors.newSingleThreadExecutor();
+        for (int i = 0; i < 10; i++) {
+            final int ii = i;
+            pool.execute(() ->
+                    out.println(Thread.currentThread().getName() + "=>" + ii)
+            );
+        }
+    }
 
 
 
