@@ -15,23 +15,16 @@ public class Test {
         a[j] = t;
     }
 
+
+
     public static void main(String[] args) {
-        int i = -17;
-        int a = i >>> 4;
-        System.out.println(Integer.MAX_VALUE);
+        String s="test";
+        char[] chars=s.toCharArray();
+        System.out.println(chars[1]);
     }
+
+
 
 }
-
-    public static void singleTheadPoolTest() {
-        ExecutorService pool = Executors.newSingleThreadExecutor();
-        for (int i = 0; i < 10; i++) {
-            final int ii = i;
-            pool.execute(() ->
-                    out.println(Thread.currentThread().getName() + "=>" + ii)
-            );
-        }
-    }
-
 
 
