@@ -1,3 +1,5 @@
+import javafx.util.Pair;
+
 import java.util.*;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
@@ -18,9 +20,13 @@ public class Test {
 
 
     public static void main(String[] args) {
-        String s="test";
-        char[] chars=s.toCharArray();
-        System.out.println(chars[1]);
+        Pair<Integer, String> pair = new Pair<>(1, "One");
+        Integer key = pair.getKey();
+        String value = pair.getValue();
+        System.out.println(key);
+
+        Queue<Integer[]> queue=new LinkedList<>();
+        queue.offer(new Integer[]{0,0});
     }
 
 
