@@ -3,22 +3,17 @@ import java.util.Stack;
 public class CommonAncestor236 {
     /**
      * 查找目标节点到根节点的路径
-     * @param root  根节点
-     * @param t 目标节点
-     * @param s 保存路径的栈
+     *
+     * @param root 根节点
+     * @param t    目标节点
+     * @param s    保存路径的栈
      * @return 是否找到目标节点
      */
     public boolean findPreNode(TreeNode root, TreeNode t, Stack<TreeNode> s) {
+        if (root == null)
+            return false;
         s.push(root);
-        if (root.left != null) {
-            if (findPreNode(root.left, t, s))   //在左子树中查找，若成功则返回
-                return true;
-        }
-        if (root.right != null) {
-            if (findPreNode(root.right, t, s))
-                return true;
-        }
-        if (root == t)      //左右根后序遍历
+        if (root == t || findPreNode(root.left, t, s) || findPreNode(root.right, t, s))
             return true;
         else {
             s.pop();
