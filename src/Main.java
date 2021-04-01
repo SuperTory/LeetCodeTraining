@@ -2,52 +2,26 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        int k = sc.nextInt();
-        char[][] map = new char[n][m];
-        String[] directions = new String[k];
-        int si = 0, sj = 0;
+        Scanner scanner = new Scanner(System.in);
+        int len = scanner.nextInt();
+        int[] nums = new int[len];
+        for (int i = 0; i < len; i++)
+            nums[i] = scanner.nextInt();
+        int target = scanner.nextInt();
 
-        for (int i = 0; i < n; i++) {
-            String s = sc.next();
-            int index = s.indexOf('@');
-            map[i] = s.toCharArray();
-            if (index != -1) {
-                si = i;
-                sj = index;
-                map[si][sj] = '.';
+        int count = 0;
+        for (int j = 0; j < len; j++) {
+            for (int i = 0; i < j; i++) {
+                int temp = nums[i];
+                for (int k = i + 1; k < j; k++) {
+                    temp = temp | nums[k];
+                }
+                if (temp <= target)
+                    count++;
             }
-
-        }
-        for (int i = 0; i < k; i++) {
-            directions[i] = sc.next();
         }
 
-        int[] move = new int[2];
-        for (String direc : directions) {
-            switch (direc) {
-                case "NORTH":
-                    move = new int[]{-1, 0};
-                    break;
-                case "SOUTH":
-                    move = new int[]{1, 0};
-                    break;
-                case "WEST":
-                    move = new int[]{0, -1};
-                    break;
-                case "EAST":
-                    move = new int[]{0, 1};
-                    break;
-            }
-            while (si >= 0 && si < n && sj >= 0 && sj < m && map[si][sj] == '.') {
-                si += move[0];
-                sj += move[1];
-            }
-            si -= move[0];
-            sj -= move[1];
-        }
-        System.out.printf("%d %d", si + 1, sj + 1);
+        count = count % 1000000007;
+        System.out.println(count);
     }
 }

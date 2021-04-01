@@ -11,18 +11,19 @@ public class Test {
             if (sum == k) {
                 count++;
                 sum -= nums[left++];
-            } else if (sum < k && right<nums.length) {
+            } else if (sum < k && right < nums.length) {
                 sum += nums[right++];
             } else {
                 sum -= nums[left++];
             }
         }
+
         return count;
     }
 
     public static void main(String[] args) {
-        Test t = new Test();
-        System.out.println(t.subarraySum(new int[]{-1, -1, 1}, 0));
+
+        System.out.println(6|5|16);
     }
 
 
