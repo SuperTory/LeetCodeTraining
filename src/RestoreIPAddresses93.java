@@ -6,7 +6,7 @@ public class RestoreIPAddresses93 {
 
     public List<String> restoreIpAddresses(String s) {
         StringBuilder subStr = new StringBuilder();
-        subIp(s.toCharArray(), subStr, 0, 0);
+        subIpStr(s.toCharArray(), "", 0, 0);
         return res;
     }
 
@@ -28,6 +28,25 @@ public class RestoreIPAddresses93 {
                         subIp(s, subStr, index + i + 1, k + 1);
                         //递归结束后要进行回溯，删除添加的字符
                         subStr.delete(subStr.length() - 2 - i, subStr.length());
+                    }
+                }
+            }
+        }
+    }
+
+    private void subIpStr(char[] s, String subStr, int index, int k) {
+        if (k == 4 || index == s.length) {
+            if (k == 4 && index == s.length)
+                res.add(subStr.substring(0, subStr.length() - 1));
+        } else {
+            if (s[index] == '0') {
+                subIpStr(s, subStr + "0.", index + 1, k + 1);
+            } else {
+                int temp = 0;
+                for (int i = 0; i < 3 && (index + i < s.length); i++) {
+                    temp = temp * 10 + (s[index + i] - '0');
+                    if (temp <= 255) {
+                        subIpStr(s, subStr + temp + ".", index + i + 1, k + 1);
                     }
                 }
             }
