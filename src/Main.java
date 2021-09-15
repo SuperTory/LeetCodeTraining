@@ -1,27 +1,53 @@
-import java.util.Scanner;
+import java.util.*;
+
+import static java.util.Arrays.binarySearch;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int len = scanner.nextInt();
-        int[] nums = new int[len];
-        for (int i = 0; i < len; i++)
-            nums[i] = scanner.nextInt();
-        int target = scanner.nextInt();
+    static class Station implements Comparable<Station>{
+        String name;
+        int start;
+        int end;
 
-        int count = 0;
-        for (int j = 0; j < len; j++) {
-            for (int i = 0; i < j; i++) {
-                int temp = nums[i];
-                for (int k = i + 1; k < j; k++) {
-                    temp = temp | nums[k];
-                }
-                if (temp <= target)
-                    count++;
+        public Station(String name, int start, int end) {
+            this.name = name;
+            this.start = start;
+            this.end = end;
+        }
+
+        @Override
+        public int compareTo(Station o) {
+            return Integer.compare(this.end, o.end);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<Station> stationList=new ArrayList<>();
+        while(sc.hasNextLine()) {
+            String s=sc.nextLine();
+            if (s.equals("")){
+                break;
+            }
+            String[] data = s.split(",");
+            Station station=new Station(data[0],Integer.parseInt(data[1]),Integer.parseInt(data[2]));
+            stationList.add(station);
+        }
+        Collections.sort(stationList);
+
+        List<Station> res=new ArrayList<>();
+        int last=0;
+        for(Station station:stationList){
+            if (station.start>=last){
+                res.add(station);
+                last=station.end;
             }
         }
 
-        count = count % 1000000007;
-        System.out.println(count);
+        for(Station station:res){
+            System.out.print(station.name+" ");
+        }
+
+        System.out.println(stationList.get(0).name);
+
     }
 }
