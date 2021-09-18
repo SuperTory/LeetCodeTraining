@@ -1,0 +1,94 @@
+作者：吃苹果的皮卡丘
+链接：https://www.nowcoder.com/discuss/750168?type=post&order=time&pos=&page=1&ncTraceId=&channel=-1&source_id=search_post_nctrack
+来源：牛客网
+
+int n,a,b;
+    cin >> n>>a>>b;
+    vector<string> s(n, "");
+    vector<vector<int>> chuan;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> s[i];
+        for (int j = 0; j < n; j++)
+        {
+            if (s[i][j] == '*')
+            {
+                chuan.push_back(vector<int>{i, j});
+            }
+        }
+    }
+    unordered_map<int, int> p;
+    unordered_map<int, int> pp;
+    priority_queue<vector<int>, vector<vector<int>>, cmp> q;
+    q.push(vector<int>{0, 0, 0});
+    p[0] = 1;
+    while (q.empty() == 0)
+    {
+        vector<int> t = q.top();
+        q.pop();
+        if (t[0] == n - 1 && t[1] == n - 1)
+        {
+            cout << t[2] << '\n';
+            break;
+        }
+        if (s[t[0]][t[1]] == '*')
+        {
+            for (int i = 0; i < chuan.size(); i++)
+            {
+                if (pp[chuan[i][0] * n + chuan[i][1]] == 0)
+                {
+                    q.push(vector<int>{chuan[i][0], chuan[i][1], t[2] + b});
+                    pp[chuan[i][0] * n + chuan[i][1]] = 1;
+                }
+            }
+        }
+        if (t[0] + 1 < n && p[(t[0] + 1) * n + t[1]] == 0)
+        {
+            if (s[t[0] + 1][t[1]] == '.'|| s[t[0] + 1][t[1]] == '*')
+            {
+                q.push(vector<int>{t[0]+1, t[1], t[2]});
+            }
+            else
+            {
+                q.push(vector<int>{t[0] + 1, t[1], t[2]+a});
+            }
+            p[(t[0] + 1) * n + t[1]] = 1;
+        }
+        if (t[0] - 1 >=0 && p[(t[0] - 1) * n + t[1]] == 0)
+        {
+            if (s[t[0] - 1][t[1]] == '.' || s[t[0] - 1][t[1]] == '*')
+            {
+                q.push(vector<int>{t[0] - 1, t[1], t[2]});
+            }
+            else
+            {
+                q.push(vector<int>{t[0] - 1, t[1], t[2] + a});
+            }
+            p[(t[0] - 1) * n + t[1]] = 1;
+        }
+        if (t[1] + 1 < n && p[t[0] * n + t[1]+1] == 0)
+        {
+            if (s[t[0]][t[1]+1] == '.' || s[t[0]][t[1]+1] == '*')
+            {
+                q.push(vector<int>{t[0], t[1]+1, t[2]});
+            }
+            else
+            {
+                q.push(vector<int>{t[0], t[1]+1, t[2] + a});
+            }
+            p[t[0]* n + t[1]+1] = 1;
+        }
+        if (t[1] - 1 >=0 && p[t[0] * n + t[1] - 1] == 0)
+        {
+            if (s[t[0]][t[1] - 1] == '.' || s[t[0]][t[1] - 1] == '*')
+            {
+                q.push(vector<int>{t[0], t[1] - 1, t[2]});
+            }
+            else
+            {
+                q.push(vector<int>{t[0], t[1] - 1, t[2] + a});
+            }
+            p[t[0] * n + t[1] - 1] = 1;
+        }
+    }
+    return 0;

@@ -23,7 +23,7 @@ public class LC23MergeKSortedLists {
         for(int nullList=0;nullList<lists.length;){
             nullList=0;
             int minVal=10000,minList=0;
-            for(int i=0;i<lists.length;i++){
+            for(int i=0;i<lists.length;i++){    //依次遍历各个链表找到最小值的节点
                 if(lists[i]==null)
                     nullList++;
                 else{
@@ -34,7 +34,7 @@ public class LC23MergeKSortedLists {
                 }
             }
             if (lists[minList]!=null) {
-                stack.push(minVal);
+                stack.push(minVal);         // 将节点压入栈中
                 lists[minList] = lists[minList].next;
             }
             System.out.println();
@@ -42,7 +42,7 @@ public class LC23MergeKSortedLists {
 
         ListNode headList=new ListNode();
         headList.next=null;
-        while(!stack.empty()){
+        while(!stack.empty()){      // 依次将栈中元素弹出并还原为链表
             ListNode newNode=new ListNode(stack.pop(),headList.next);
             headList.next=newNode;
         }

@@ -1,32 +1,27 @@
-import javafx.util.Pair;
-
-import java.util.*;
-
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.List;
 
 public class Test {
-    public int subarraySum(int[] nums, int k) {
-        int left = 0, right = 1;
-        int count = 0, sum = nums[0];
-        while (left < nums.length) {
-            if (sum == k) {
-                count++;
-                sum -= nums[left++];
-            } else if (sum < k && right < nums.length) {
-                sum += nums[right++];
-            } else {
-                sum -= nums[left++];
-            }
-        }
+    private int[] sum;
 
-        return count;
+    public Test(int[] nums) {
+        sum = new int[nums.length + 1];
+        sum[0] = 0;
+        for (int i = 1; i <= nums.length; i++) {
+            sum[i] = sum[i - 1] + nums[i - 1];
+        }
+    }
+
+    public int sumRange(int left, int right) {
+        return sum[right + 1] - sum[left];
     }
 
     public static void main(String[] args) {
-
-        System.out.println(6|5|16);
+        Test t = new Test(new int[]{-2, 0, 3, -5, 2, -1});
+        int res = t.sumRange(2, 5);
+        System.out.println(res);
     }
-
-
 }
-
-
